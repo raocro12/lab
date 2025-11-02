@@ -41,7 +41,13 @@ public class Main {
                     System.out.println(petya);
                     System.out.println("Средняя оценка: " + petya.getAverage());
 
-                    System.out.println(vasya.compare(petya));
+                    int a = vasya.compare(petya);
+                    if (a == 1)
+                        System.out.println("Средняя оценка больше у " + vasya.getName());
+                    else if (a == 0)
+                        System.out.println("Средние оценки одинаковы");
+                    else
+                        System.out.println("Средняя оценка больше у " + petya.getName());
                     break;
 
                 case 2:
