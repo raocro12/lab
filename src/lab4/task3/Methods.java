@@ -34,4 +34,6 @@ public class Methods {
     public static <T> T method3(List<T> list, MyCombiner<T> combiner){
         return combiner.combine(list);
     }
+
+
 }

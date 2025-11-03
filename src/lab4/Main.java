@@ -1,6 +1,7 @@
 package lab4;
 
 import lab1.InputChecker;
+import lab2.Point;
 import lab3.Figure.Point3D;
 import lab4.task1.Student;
 import lab4.task2.Box;
@@ -52,8 +53,13 @@ public class Main {
 
                 case 2:
                     Box<Point3D> box = new Box<>();
-                    PointInBox.putPoint(box);  //кладем точку в коробку
+                    PointInBox.putPoint(box);
                     System.out.println(box);
+
+                    Box<Point> box2 = new Box<>();
+                    PointInBox.putPoint(box2);
+                    System.out.println(box2);
+
                     break;
 
                 case 3:
@@ -173,12 +179,33 @@ public class Main {
                     });
                     System.out.println(summ);
 
-//                    //3. Имеется список, состоящий из списков целых чисел, получите общеe количество
-//                    //элементов во всех списках. Подсказка: решить задачу можно в одно действие или
-//                    //последовательно использовать методы из 3.3.1 и 3.3.3.
-//                    List<int[]> strings3_3 = List.of(new int[]{-1, -2, -3}, new int[]{5, 7, -1}, new int[]{4, 3, 2});
-//                    int obKol = Methods.method3(strings3_3, new MyCombiner<Integer>() {
+                    //3. Имеется список, состоящий из списков целых чисел, получите общеe количество
+                    //элементов во всех списках. Подсказка: решить задачу можно в одно действие или
+                    //последовательно использовать методы из 3.3.1 и 3.3.3.
+
+                    // 1) превращаем массивы в длины массивов
+                    List<int[]> strings3_3 = List.of(new int[]{-1, -2, -3}, new int[]{5, 7, -1}, new int[]{4, 3, 2});
+                    List<Integer> lengths1 = Methods.method1(strings3_3, new MyFanction<int[], Integer>() {
+                        @Override
+                        public Integer apply(int[] arr) {
+                            return arr.length;
+                        }
+                    });
+
+                    // 2) reduce: суммируем все длины
+                    int result = Methods.method3(lengths1, new MyCombiner<Integer>() {
+                        @Override
+                        public Integer combine(List<Integer> list) {
+                            int sum = 0;
+                            for (int x : list) {
+                                sum += x;
+                            }
+                            return sum;
+                        }
+                    });
+                    System.out.println(result);
                     break;
+
 
                 default:
                     System.out.println("Введите правильную цифру!");

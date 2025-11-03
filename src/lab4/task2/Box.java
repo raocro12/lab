@@ -7,21 +7,18 @@ public class Box<T> {
 
     private T item;  // единственное поле класса
 
-    //разместить на хранение
-    //Если объект кладут в коробку, но она не пуста – необходимо выкинуть исключение
-    public void put(T newItem) { //ничего не возвращает, только изменяем поле класса
-        if (item != null)
-            throw new IllegalStateException("Коробка занята"); //объект в некорректном состоянии
-        else
+    public void put(T newItem) {
+        if (item != null) {
+            throw new IllegalStateException("Коробка занята");
+        } else {
             item = newItem;
+        }
     }
 
-    //получение объекта
-    //Если объект забирают из коробки – ссылку на этот объект необходимо обнулить
     public T take() {
-        if (item == null)
-            throw new NoSuchElementException(); //пытаешься получить что-то, чего нет
-        else {
+        if (item == null) {
+            throw new NoSuchElementException();
+        } else {
             T tItem = item;
             item = null;
             return tItem;
