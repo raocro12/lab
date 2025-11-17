@@ -6,9 +6,6 @@ import java.util.List;
 public class Methods {
 
     public static <T, P> List<P> method1(List<T> list, MyFanction<T, P> func) {
-        //Разработайте такой метод, который будет принимать список значений типа T, и объект имеющий
-        //единственный метод apply. Данный метод надо применить к каждому элементу списка, и вернуть
-        //новый список значений типа P, при этом типы T и P могут совпадать, а могут не совпадать.
 
         List<P> result = new ArrayList<>();
         for (T element : list) {
@@ -18,9 +15,6 @@ public class Methods {
     }
 
     public static <T> List<T> method2(List<T> list, MyFilter<T> filter) {
-        //Разработайте такой метод, который будет принимать список значений типа T и объект имеющий
-        //единственный метод test (принимает T и возвращает boolean). Верните новый список типа T, из
-        //которого удалены все значения не прошедшие проверку условием.
 
         List<T> result = new ArrayList<>();
         for (T element : list) {
@@ -35,5 +29,17 @@ public class Methods {
         return combiner.combine(list);
     }
 
+    public static <T,P> P collect(
+            List<T> list,
+            Supplier<P> supplier,
+            BiConsumer<P,T> accumulator) {
+
+        P result = supplier.get();
+
+        for (T element : list) {
+            accumulator.accept(result, element);
+        }
+        return result;
+    }
 
 }
