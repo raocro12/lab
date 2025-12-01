@@ -5,6 +5,7 @@ import lab5.task1.FractionCached;
 import lab5.task2.Cat;
 import lab5.task2.Funs;
 import lab5.task2.Meowable;
+import lab5.task5.SetFunc;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -84,7 +85,7 @@ public class Main {
                     break;
 
                 case 4:
-                    Map<Integer, List<Integer>> multiValueMap = new HashMap<>();
+                    Map<Integer, List<Integer>> balOfSchool = new HashMap<>();
 
                     try (BufferedReader br = new BufferedReader(new FileReader("src/lab5/otchet.txt"))) {
                         int n = Integer.parseInt(br.readLine());
@@ -93,27 +94,34 @@ public class Main {
                         for (int i = 0; i < n; i++) {
                             line = br.readLine();
                             String[] p = line.split(" ");
-//                            String famil = p[0];
-//                            String name = p[1];
+                            // в p[0] и p[1] лежит фамилия и имя
                             int school = Integer.parseInt(p[2]);
                             int bal = Integer.parseInt(p[3]);
 
-                            multiValueMap.computeIfAbsent(school, k -> new ArrayList<>()).add(bal);
+                            if (balOfSchool.containsKey(school)) {
+                                balOfSchool.get(school).add(bal);
+                            } else {
+                                List<Integer> list = new ArrayList<>();
+                                list.add(bal);
+                                balOfSchool.put(school, list);
+                            }
+
                             totalSum += bal;
                         }
 
                         double srednee = (double) totalSum / n;
+                        System.out.println("Средний балл по району: " + srednee);
 
                         ArrayList<Integer> res = new ArrayList<>();
-                        for (Map.Entry<Integer, List<Integer>> entry : multiValueMap.entrySet()) {
-                            ArrayList<Integer> values = (ArrayList<Integer>) entry.getValue();
-                            System.out.println(values);
+                        for (Map.Entry<Integer, List<Integer>> entry : balOfSchool.entrySet()) {
+                            List<Integer> values = entry.getValue();
+                            System.out.println("В школе №" + entry.getKey() + " оценки учеников: " + values);
                             int summ = 0;
                             for (int val : values) {
                                 summ += val;
                             }
                             double sredneeInSchool = (double) summ / values.size();
-                            System.out.println(sredneeInSchool);
+                            System.out.println("Средний балл: " + sredneeInSchool);
                             if (sredneeInSchool > srednee) {
                                 res.add(entry.getKey());
                             }
@@ -126,12 +134,14 @@ public class Main {
                     break;
 
                 case 5:
-                    String text = Files.readString(Paths.get("src/lab5/text.txt")).toLowerCase();
+                    System.out.println("Символы, встречающиеся ровно в одном слове: " + SetFunc.disjunction("src/lab5/task5/text.txt"));
 
-                    // Разбиваем текст на слова, игнорируя знаки препинания
-                    String[] words = text.split("\\W+");
+                    System.out.println("Символы, встречающиеся ровно в одном слове: " + SetFunc.disjunction("src/lab5/task5/text1.txt"));
+                    break;
 
-
+                case 6:
+                    List <Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
+                    System.out.println("Список в обратном порядке: " + QueueWork.reverse(list1));
                     break;
 
                 default:

@@ -2,7 +2,7 @@ package lab5.task2;
 
 public class Meowable implements Meowing{
     private Cat cat;
-    private int count = 0;
+    private int count;
 
     public Cat getCat() {
         return cat;
@@ -18,6 +18,7 @@ public class Meowable implements Meowing{
 
     public Meowable(Cat cat){
         setCat(cat);
+        this.count = 0;
     }
 
     @Override
